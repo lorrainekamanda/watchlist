@@ -1,0 +1,11 @@
+{% macro displayMovieList(movie_list) %}
+
+    {% for movie in movie_list %}
+ 
+        <li> <a href="/review"> {{ movie.title| truncate (10)}}</a></li>
+
+        <img src="{{ movie.poster}}" alt="" srcset=""><br><br>
+      
+    {% endfor %}
+
+{% endmacro %}
