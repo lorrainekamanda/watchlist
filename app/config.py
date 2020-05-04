@@ -2,10 +2,10 @@ class Config:
     '''
     General configuration parent class
     '''
-    MOVIE_API_BASE_URL ='https://api.themoviedb.org/3/movie/{}?api_key={}'
-
-
-
+    
+  
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://lorrainekamanda:leilas@localhost/watchlists'
+   
 
 
 class ProdConfig(Config):
