@@ -1,35 +1,75 @@
-{% import 'macros.html' as macro%}
+{% extends 'base.html'%}
+
+{% block title%}
+
+<h1 class="title">THE NEXT BIG THING</h1>
+
+{%endblock%}
+
+{% block content%}
+ 
 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Movies</title>
-</head>
-<body>
-  <!-- Popular movie -->
-  <h3> Popular Movies</h3><br>
-    <!-- <ul>
-     {% for popular_movie in popular %}
-         <li> <a href = '/review'>  {{ popular_movie.title}}   </a></li>
-         <img src="{{popular_movie.poster}}" alt="" srcset="">
-      
-         <p> </p>
+<ul>
+    <section>
 
-       
-     {% endfor %}
- </ul> -->
+    <aside>
+        <h3>THE NEXT BIG THING</h3>
+         <p>
+            In life, you only have 60 seconds to impress someone. 1 minute can make or break you. 
+            How do we make sure that you use your 1 minute to actually say something meaningful?.Use this
+            sight to post,view and comment on amazing ideas.This is how we make the next big thing
 
- <ul>
-    {{ macro.displayMovieList(popular)}}
-  
+         </p>
+         </aside>
+        </section>
 
- </ul>
-
-
+    <h1> PITCHES </h1>
+   
+    {% if new_bookmarks %}
+    {% for bm in new_bookmarks%} 
+    <h3> {{bm.title}}</h3>
     
-</body>
-</html>
+    
+    <li>{{bm.review}}</li>
+
+   
+
+    <a href="http://"> Leave Comment </a>
+
+    {%endfor%}
+    {%endif%}
+
+
+
+
+
+<button id = 'carrier'>0</button>
+
+
+
+
+
+
+<script src="../static/js/main.ts"></script>
+<script src="../static/js/main.js"></script>
+
+{%endblock%}
+
+
+
+<script>
+
+
+var  count = (function(){
+
+var counter = 0;
+
+return function() {return counter++}
+})()
+
+function displaycount(){
+document.getElementById("carrier").innerHTML = count();
+}
+
+</script>

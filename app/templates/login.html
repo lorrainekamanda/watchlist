@@ -1,0 +1,60 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+{% extends 'base.html'%}
+{% block title%}
+
+<h1>LOG IN TO ADD COMMENT OR ADD PITCH</h1>
+
+{%endblock%}
+
+{% block content %}
+<div class="container"> 
+    <div class="row">
+      <div class= "col-md-2"> </div>
+      <div class="col-md-8">
+      <!--Flash message -->
+      {% for message in get_flashed_messages() %}
+        <div class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{ message }}
+        </div>
+      {% endfor %}
+      <!-- Login form -->
+
+      <form action="" method="post">
+
+
+        {{login_form.hidden_tag()}}
+
+        <table>
+
+         <tr>
+           <td>Email</td>
+          <td >{{login_form.email(size = 50)}}</td>
+
+         </tr> 
+         <tr>
+          <td>Password</td>
+         <td>{{login_form.password(size = 50)}}</td>
+
+        </tr>
+        <tr>
+          <td>Remember me</td>
+         <td>{{login_form.remember_me()}}</td>
+
+        </tr>
+        <tr>
+          <td>Submit</td>
+         <td>{{login_form.submit()}}</td>
+
+        </tr>
+        </table>
+      </form>
+      
+      <p> Don't have an account? <a href="{{url_for('signup')}}">Sign up here</a></p>
+     </div>
+     <div clas="col-md-2"> </div>
+    </div>
+</div>
+
+{%endblock%}

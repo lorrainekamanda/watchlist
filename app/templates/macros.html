@@ -1,11 +1,16 @@
-{% macro displayMovieList(movie_list) %}
+{% macro render_field(field)%}
 
-    {% for movie in movie_list %}
- 
-        <li> <a href="/review"> {{ movie.title| truncate (10)}}</a></li>
 
-        <img src="{{ movie.poster}}" alt="" srcset=""><br><br>
-      
-    {% endfor %}
-
-{% endmacro %}
+<table>
+    <tr {% if field.errors%} class = "error" {%endif%}></tr>
+    <tr>
+ <td>{{field.label}}</td>
+ <td> {{field(**kwargs)|safe}}</td>
+</tr>
+<tr class="error">
+    {% for error in field.errors%}
+    <li>{{error}}</li>
+    {%endfor%}
+</tr>
+</table>
+{% endmacro%}
