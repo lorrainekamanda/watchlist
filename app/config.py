@@ -4,8 +4,8 @@ class Config:
     '''
     
   
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://lorrainekamanda:leilas@localhost/watchlists'
-   
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://grace:leils@localhost/blog'
+    UPLOADED_PHOTOS_DEST ='app/static/photos'   
 
 
 class ProdConfig(Config):

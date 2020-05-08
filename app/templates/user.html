@@ -2,23 +2,31 @@
 
 {% block title%}
 
-<h1>BOOKMARK FOR; {{user.username}}    </h1>
+<h1> Update Profile; {{user.username}}    </h1>
 
 {%endblock%}
 
 {% block content %}
-  {% if user.bio%}
-  <p>{{user.bio}}</p>
-  {%else%}
-  <p>no Bio</p>
-
-  {%endif%}
   
-{%endfor%}
+<form action="" method="post">
+  <section>
+
+
+  {{update_form.hidden_tag()}}
+
+  <table>
+
+   <tr>
+     <td>BIO</td>
+    <td >{{update_form.bio(size = 50)}}</td>
+
+  
+  <tr>
+    <td>Submit</td>
+   <td>{{update_form.submit()}}</td>
+
+  </tr>
+  </table>
+</form>
 {%endblock%}
-{% if user.profile_pic_path %}
-<img src="{{url_for('static',filename=user.profile_pic_path)}}" alt="" class="img-thumbnail">
-{%else%}
-<p>No profile picture</p>
-{% endif %}
 

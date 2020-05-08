@@ -6,15 +6,20 @@
 
 {%endblock%}
 
+
+
 {% block content%}
  
 
 
 <ul>
     <section>
-
+        {%if current_user.is_authenticated%}
+<h1>Hello {{current_user.username}} </a>   </h1>  
+{%endif%}
+    {%block sidebar%}
     <aside>
-        <h3>THE NEXT BIG THING</h3>
+       
          <p>
             In life, you only have 60 seconds to impress someone. 1 minute can make or break you. 
             How do we make sure that you use your 1 minute to actually say something meaningful?.Use this
@@ -22,29 +27,40 @@
 
          </p>
          </aside>
+         {%endblock%}
         </section>
 
-    <h1> PITCHES </h1>
+    <h4> PITCHES </h4>
    
-    {% if new_bookmarks %}
+  
     {% for bm in new_bookmarks%} 
-    <h3> {{bm.title}}</h3>
-    
-    
-    <li>{{bm.review}}</li>
+    <ul class="list-group">
 
+        <h4> {{bm.title}}</h4>
+
+
+    
+    
+        <li class="list-group-item">{{bm.review}}</li>
+
+
+    </ul>
+  
+
+  
+  
+   
    
 
-    <a href="http://"> Leave Comment </a>
-
-    {%endfor%}
-    {%endif%}
+     
 
 
+    {% endfor %}
+   
 
 
 
-<button id = 'carrier'>0</button>
+
 
 
 

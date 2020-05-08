@@ -28,9 +28,11 @@
                         {% if current_user.is_authenticated %}
                         <li><a href="{{url_for('logout')}}">Sign Out</a>  </li>
                         <li><a href="{{url_for('add')}}">Add Post</a>  </li>
+                        <li><a href="{{url_for('profile',uname=current_user.username)}}">Profile</a></li>
                         {% else %}
                         <li><a href="{{url_for('signup')}}">Sign Up</a></li>
                         <li><a href="{{url_for('login')}}">Sign In</a></li>
+                        
                         
                        {% endif %}
                     </ul>

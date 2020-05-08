@@ -19,10 +19,14 @@ class User(db.Model,UserMixin):
     id = db.Column(db.Integer,primary_key = True)
     username = db.Column(db.String(100),unique = True)
     email = db.Column(db.String(100),unique = True)
-    role_id = db.Column(db.Integer,db.ForeignKey('role.id'))
+    comments = db.relationship('Comment',backref = 'user',lazy = 'dynamic')
+    role = db.relationship('Role',backref = 'user',lazy = 'dynamic')
     bio = db.Column(db.String(255),unique = False)
     profile_pic_path = db.Column(db.String())
-    pass_secure = db.Column(db.String(255))
+    pass_secure = db.Column(db.String(215))
+
+      
+    
    
 
     @property
@@ -41,56 +45,62 @@ class User(db.Model,UserMixin):
 
     def __repr__(self):
         return f'User {self.username}'
+    
+
+
 
 class Role (db.Model):
 
     __tablename__ = 'role'
-
+    
     id = db.Column(db.Integer,primary_key=True) 
     title = db.Column(db.String(400))
     date = db.Column(db.DateTime,default = datetime.utcnow)
     review = db.Column(db.String(300))
-    bookmarks = db.relationship('User',backref = 'role',lazy = 'dynamic')
+    comment = db.relationship('Comment',backref = 'role',lazy = 'dynamic')
+    user_id = db.Column(db.Integer,db.ForeignKey('user.id'))
     
     @staticmethod
     def newest(num):
-        return Role.query.order_by(desc(Role.date)).limit(num)   
+        return Role.query.order_by(desc(Role.date)).limit(num)
+    
+  
+    
+    
+    
+    def __repr__(self):
+        return f'User {self.review} {self.title}'
+    
+    
+
+
+  
+
+class Comment(db.Model):
+    __tablename__ = 'comments'
+    id = db.Column(db.Integer,primary_key=True) 
+    comment = db.Column(db.String(300))
+    date = db.Column(db.DateTime,default = datetime.utcnow) 
+    user_id = db.Column(db.Integer,db.ForeignKey('user.id'))
+    role_id = db.Column(db.Integer,db.ForeignKey('role.id'))
+
+
+   
+
+    
+
+    @classmethod
+    def new(cls,role_id):
+         comment = Comment.query.filter_by(role_id = role_id).all()  
+
+    def save_review(self):
+        db.session.add(self)
+        db.session.commit()
 
     def __repr__(self):
-        return f'User {self.title} {self.review} '
+        return f'User {self.comment} '
 
 
 
         
-# class UserMixin(object):
-#     def is_active(self):
-#         return True
-#     def is_authenticated(self):
-#         return True
-#     def is_anonymous(self):
-#         return False
-#     def get_id(self):
-#         try:
-#             return unicode (self.id)
-#         except AttributeError:
-#             raise NotImplementedError('No id ')
-#     def __eq__(self,other):
-#         if isinstance(other,UserMixin):
-#             return self.get_id()==other.get_id()
-#         return NotImplemented
-          
-#     def __ne__(self,other):
-#         equal = self.__eq__(other)
-#         if equal is NotImplemented:
-#             return NotImplemented
-#         return not equal
 
-# class AnonymousUserMixin(object):
-#     def is_authenticated(self):
-#         return False
-#     def is_active(self):
-#         return False
-#     def is_anonymous(self):
-#         return True
-#     def get_id(self):
-#         get_id

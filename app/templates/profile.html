@@ -1,34 +1,57 @@
 {% extends 'base.html'%}
+{% block title%}
 
-{% extends 'base.html'%}
+<h1>{{ user.username}}'s Profile</h1>
+
+{%endblock%}
+
 
 {% block content %}
 <div class="container">
 <div class="row">
-<!-- displaying  Username-->
-  <div class="col-md-4">
-    <h3> {{user.username| capitalize}} </h3>
-
-    <!--Displaying user bio-->
-    {% if user.bio %}
-      <p> {{user.bio}}</p>
-    {%else%}
-      <p> {{user.username| capitalize}} has no bio </p>
-    {% endif %}
-  </div>
-
 
   <div class="col-md-4">
+ 
 
-    {% if user.profile_pic_path %}
-    <img src="{{url_for('static',filename=user.profile_pic_path)}}" alt="" class="img-thumbnail">
+  
+
+  
+
+  
+  <h1>Username: {{current_user.username}}  </h1> 
+  <h1> Email :{{current_user.email}}  </h1> 
+  {% if user.bio %}
+  <h3>Bio: {{user.bio}}</h3>
+  {% endif %}
+
+    <div class="col-md-4">
+
+    <!-- {% if user.profile_pic_path %}
+   
     {%else%}
     <p>No profile picture</p>
-    {% endif %}
-  </div>
+    {% endif %} 
+ </div>
 </div>
-</div>
-{% endblock %}
 {% if user == current_user %}
-<a href="{{url_for('main.update_profile',name=user.username)}}">Edit profile</a>
-{% endif %}
+
+
+  <input type="file"  name="photo" class="form-control" required>
+  <input type="submit">
+</form>
+  {% endif %}
+</div> -->
+<form action="" method ="post" enctype = "multipart/form-data">  
+
+
+
+
+
+
+</div>
+{% if user == current_user %}
+<a href="{{url_for('update_profile',uname=user.username)}}">BIO</a>
+{% endif %}  
+{% endblock %}
+ </div>
+</form>

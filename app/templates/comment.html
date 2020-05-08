@@ -1,0 +1,45 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+{% extends 'base.html'%}
+{% block title%}
+
+<h1>GIVE A FEEDBACK</h1>
+
+{%endblock%}
+
+{% block content %}
+<div class="container"> 
+   
+      <form action="" method="post">
+        <section>
+
+
+        {{comment.hidden_tag()}}
+
+        <table>
+
+         <tr>
+           <td>Feedback</td>
+          <td >{{comment.comment(size = 50)}}</td>
+
+         </tr> 
+       
+
+        </tr>
+        <tr>
+          <td>Submit</td>
+         <td>{{comment.submit()}}</td>
+
+        </tr>
+        </table>
+      </form>
+      
+      
+</div>
+
+</section>
+{%endblock%}
+
+{%block sidebar%}
+{%endblock%}
+

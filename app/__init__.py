@@ -1,6 +1,7 @@
 import os
+
 from .config import DevConfig
-from flask import Flask
+from flask import Flask,render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_login import login_required,login_user,current_user
@@ -19,12 +20,13 @@ login_manager.session_protection = "strong"
 login_manager.login_view = "login"
 login_manager.init_app(app)
 
+
 mail = Mail(app)
 mail.init_app(app)
 db.init_app(app)
 
 app.config['SECRET_KEY'] = '\xae~\x05?4\xe8\x1a\xf0v}\x9f\xf3<H\xefu4\x8e\xbf{c\xe5\x9d\x7f'
-app.config["SQLALCHEMY_DATABASE_URI"] = 'postgresql+psycopg2://lorrainekamanda:leilas@localhost/watchlists'
+app.config["SQLALCHEMY_DATABASE_URI"] = 'postgresql+psycopg2://grace:leils@localhost/blog'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
 app.config["MAIL_SERVER"] = "smtp.gmail.com"
 app.config["MAIL_PORT"] = 465
@@ -33,15 +35,19 @@ app.config["MAIL_USERNAME"] = 'lorrainekamanda@gmail.com'
 app.config["MAIL_PASSWORD"] = 'leilanjeri123'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_PORT_TLS'] = 587
+app.config['UPLOADED_PHOTOS_DEST'] ='app/static/photos'
+
 mail = Mail(app)
 mail.init_app(app)
 
-@app.route("/")
+@app.route("/message")
 def index():
-   msg = Message('Hello', sender = 'lorrainekamanda@gmail.com', recipients = ['lorrainekamanda@gmail.com'])
-   msg.body = "Hello and Welcome"
+   msg = Message('The Next Big Thing', sender = 'lorrainekamanda@gmail.com', recipients = ['lorrainekamanda@gmail.com'])
+   msg.body = "Hello and Welcome to The Next Big Thing where you get The Chance to Pitch Project Ideas and get a Chance to View Amazing Ideas "
    mail.send(msg)
-  
+   return render_template('index.html')
+
+
 
 
 def create_app(config_name):
@@ -54,6 +60,7 @@ def create_app(config_name):
     app.register_blueprint(auth_blueprint,url_prefix = '/authenticate')
     bootstrap.init_app(app)
     mail.init_app(app)
+  
     
     return app
 

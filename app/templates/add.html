@@ -9,41 +9,40 @@
 
 {% block content %}
 <div class="container"> 
-    <div class="row">
-      <div class= "col-md-2"> </div>
-      <div class="col-md-8">
-      <!--Flash message -->
-      {% for message in get_flashed_messages() %}
-        <div class="alert alert-danger">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        {{ message }}
-        </div>
-      {% endfor %}
-      <!-- Login form -->
+   
+   
 
       <form action="" method="post">
 
 
         {{form.hidden_tag()}}
+        
+        
 
         <table>
 
+          <th>
+
          <tr>
            <td>Title</td>
-          <td >{{form.title(size = 50)}}</td>
+          <td >{{form.title(size = 50)}}</td><br> <br> 
+        </th>
+      </tr> 
+        <tbody>
 
-         </tr> 
+         
          <tr>
           <td>Review</td>
          <td>{{form.review(size = 50)}}</td>
 
         </tr>
+     
         <tr>
             <td>Submit</td>
-           <td>{{form.submit()}}</td>
+           <td >{{form.submit()}}</td>
   
           </tr>
-        
+        </tbody>
         </table>
       </form>
       
